@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎌 ACG角色人气投票</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- ===== 顶部导航栏 ===== -->
+    <nav class="navbar">
+        <div class="nav-brand">🎌 ACG角色人气投票</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">🗳️ 投票</a>
+            <a href="results.html">📊 结果</a>
+        </div>
+    </nav>
+
+    <!-- ===== 顶部横幅区域 ===== -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>✨ 2024年度ACG角色人气大投票 ✨</h1>
+            <p class="subtitle">选出你心目中最喜欢的角色吧！每天可以投 3 票</p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-votes">0</span>
+                    <span class="stat-label">总投票数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-characters">0</span>
+                    <span class="stat-label">参选角色</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="remaining-votes">3</span>
+                    <span class="stat-label">今日剩余票数</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== 分组筛选和搜索 ===== -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <button class="filter-btn active" data-group="all">🌟 全部</button>
+            <button class="filter-btn" data-group="anime">🎬 动画</button>
+            <button class="filter-btn" data-group="game">🎮 游戏</button>
+            <button class="filter-btn" data-group="comic">📚 漫画</button>
+            <button class="filter-btn" data-group="vtuber">🎤 虚拟歌手/VTuber</button>
+        </div>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="🔍 搜索角色名或作品名...">
+        </div>
+    </section>
+
+    <!-- ===== 角色卡片列表 ===== -->
+    <main class="characters-section">
+        <div class="character-grid" id="character-grid">
+            <!-- 这里的内容由 main.js 自动生成，你不用管 -->
+            <div class="loading">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== 快速排行榜（侧边展示） ===== -->
+    <section class="quick-ranking">
+        <h2>🏆 实时 TOP 5</h2>
+        <div id="top5-list" class="top5-list">
+            <!-- 由 main.js 自动生成 -->
+        </div>
+        <a href="results.html" class="view-all-btn">查看完整排名 →</a>
+    </section>
+
+    <!-- ===== 投票弹窗 ===== -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon" id="modal-icon">🎉</div>
+            <h2 id="modal-title">投票成功！</h2>
+            <p id="modal-message">感谢你的投票</p>
+            <button class="modal-close-btn" id="modal-close-btn">好的</button>
+        </div>
+    </div>
+
+    <!-- ===== 页脚 ===== -->
+    <footer class="footer">
+        <p>🎌 2024 ACG角色人气投票活动 · 仅供学习交流</p>
+        <p>所有角色及相关图像版权归原作者/版权方所有</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
