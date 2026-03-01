@@ -34,7 +34,7 @@ const CHARACTER_DATA = [
         description: "世界上最知名的虚拟歌手，标志性的蓝绿色双马尾，永远的16岁。",
         emoji: "🎤",
         image: "",
-        votes: 1283
+        votes: 0
     },
     {
         id: 2,
@@ -44,7 +44,7 @@ const CHARACTER_DATA = [
         description: "罗兹瓦尔邸的双子女仆之一，蓝发蓝眸的鬼族少女，温柔又坚强。",
         emoji: "💙",
         image: "",
-        votes: 1156
+        votes: 0
     },
     {
         id: 3,
@@ -54,7 +54,7 @@ const CHARACTER_DATA = [
         description: "心地善良的炭烧少年，为拯救变成鬼的妹妹禰豆子而踏上战斗旅途。",
         emoji: "🔥",
         image: "",
-        votes: 1089
+        votes: 0
     },
     {
         id: 4,
@@ -64,7 +64,7 @@ const CHARACTER_DATA = [
         description: "YoRHa部队的二号B型战斗用人造人，冷静优雅的战士。",
         emoji: "⚔️",
         image: "",
-        votes: 987
+        votes: 0
     },
     {
         id: 5,
@@ -74,7 +74,7 @@ const CHARACTER_DATA = [
         description: "东京都立咒术高专教师，当代最强咒术师，六眼与无下限术式的持有者。",
         emoji: "👁️",
         image: "",
-        votes: 1342
+        votes: 0
     },
     {
         id: 6,
@@ -84,7 +84,7 @@ const CHARACTER_DATA = [
         description: "拥有读心超能力的可爱小女孩，最喜欢花生和间谍动画片，哇酷哇酷！",
         emoji: "🥜",
         image: "",
-        votes: 1421
+        votes: 0
     },
     {
         id: 7,
@@ -94,7 +94,7 @@ const CHARACTER_DATA = [
         description: "稻妻的雷神，追求永恒的神明，既威严又有着可爱的一面。",
         emoji: "⚡",
         image: "",
-        votes: 1105
+        votes: 0
     },
     {
         id: 8,
@@ -104,7 +104,7 @@ const CHARACTER_DATA = [
         description: "草帽海贼团船长，橡胶果实能力者，梦想成为海贼王的自由男人！",
         emoji: "👒",
         image: "",
-        votes: 1267
+        votes: 0
     },
     {
         id: 9,
@@ -114,7 +114,7 @@ const CHARACTER_DATA = [
         description: "中国最具人气的虚拟歌手，灰发绿瞳的元气少女。",
         emoji: "🎵",
         image: "",
-        votes: 834
+        votes: 0
     },
     {
         id: 10,
@@ -124,7 +124,7 @@ const CHARACTER_DATA = [
         description: "木叶村的超级忍者，九尾人柱力，永不放弃的热血少年，梦想成为火影！",
         emoji: "🍥",
         image: "",
-        votes: 1178
+        votes: 0
     },
     {
         id: 11,
@@ -134,7 +134,7 @@ const CHARACTER_DATA = [
         description: "璃月往生堂客卿，真实身份是岩王帝君摩拉克斯，优雅博学但没有摩拉。",
         emoji: "🪨",
         image: "",
-        votes: 956
+        votes: 0
     },
     {
         id: 12,
@@ -144,7 +144,7 @@ const CHARACTER_DATA = [
         description: "学园都市排名第三的Level 5超能力者，电击使（Railgun），性格率真。",
         emoji: "⚡",
         image: "",
-        votes: 892
+        votes: 0
     },
     {
         id: 13,
@@ -154,7 +154,7 @@ const CHARACTER_DATA = [
         description: "万事屋老板，白夜叉，爱吃甜食、爱看JUMP，嘴上不饶人但内心温柔。",
         emoji: "🍓",
         image: "",
-        votes: 1045
+        votes: 0
     },
     {
         id: 14,
@@ -164,7 +164,7 @@ const CHARACTER_DATA = [
         description: "海拉鲁的勇者，沉默寡言但勇敢无畏，永远在拯救公主的路上。",
         emoji: "🗡️",
         image: "",
-        votes: 978
+        votes: 0
     },
     {
         id: 15,
@@ -174,7 +174,7 @@ const CHARACTER_DATA = [
         description: "超级天才科学少年，要用科学之力复兴全人类，唆嘎～真是令人兴奋！",
         emoji: "🧪",
         image: "",
-        votes: 756
+        votes: 0
     },
     {
         id: 16,
@@ -184,7 +184,7 @@ const CHARACTER_DATA = [
         description: "吞下宿傩手指的少年，身体能力异常强大，正义感爆棚的高中生。",
         emoji: "👊",
         image: "",
-        votes: 823
+        votes: 0
     }
 ];
 

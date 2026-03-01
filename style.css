@@ -618,3 +618,846 @@ body::before {
         grid-template-columns: 1fr;
     }
 }
+/* ============================================================
+   ===== 新增：活动介绍页 + 最终结果页 + 装饰效果 =====
+   ============================================================ */
+
+/* ---------- 所有页面导航栏更新（4个页面） ---------- */
+.nav-links { gap: 5px; }
+.nav-links a { padding: 7px 14px; font-size: 14px; }
+
+/* ---------- 活动介绍页 - 主视觉 ---------- */
+.about-hero {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+    /* 👇 这里引用你的背景图片 */
+    background: url('images/about-bg.jpg.jpeg') center/cover no-repeat;
+}
+
+/* 背景图上面盖一层半透明渐变色（让文字看得清） */
+.about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 10, 30, 0.85),
+        rgba(83, 52, 131, 0.75),
+        rgba(15, 52, 96, 0.8)
+    );
+    z-index: 1;
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px 20px;
+}
+
+.about-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pink), #ff6b81);
+    padding: 6px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+}
+
+.about-hero-content h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    margin-bottom: 12px;
+    text-shadow: 0 0 40px rgba(233,69,96,0.4);
+}
+
+.about-tagline {
+    font-size: clamp(14px, 2.5vw, 18px);
+    color: var(--text-gray);
+    margin-bottom: 30px;
+}
+
+/* 日期展示 */
+.about-date-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.date-item { text-align: center; }
+.date-label { display: block; font-size: 12px; color: var(--text-gray); }
+.date-value { display: block; font-size: 24px; font-weight: 800; color: var(--pink); }
+.date-divider { font-size: 24px; color: var(--text-gray); }
+
+/* CTA按钮 */
+.about-cta-btn {
+    display: inline-block;
+    padding: 12px 36px;
+    background: linear-gradient(135deg, var(--pink), #ff6b81);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(233,69,96,0.3);
+}
+
+.about-cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(233,69,96,0.5);
+}
+
+.about-cta-btn.large {
+    padding: 14px 44px;
+    font-size: 18px;
+}
+
+/* ---------- 飘浮装饰元素 ---------- */
+.floating-decor {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.3;
+    z-index: 2;
+    animation: floatUpDown 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.d1 { top: 15%; left: 10%; animation-delay: 0s; font-size: 24px; }
+.d2 { top: 25%; right: 12%; animation-delay: 1s; font-size: 18px; }
+.d3 { top: 60%; left: 8%; animation-delay: 2s; font-size: 22px; }
+.d4 { top: 70%; right: 15%; animation-delay: 3s; font-size: 16px; }
+.d5 { top: 40%; left: 20%; animation-delay: 1.5s; font-size: 20px; }
+.d6 { top: 50%; right: 25%; animation-delay: 2.5s; font-size: 14px; }
+
+@keyframes floatUpDown {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* ---------- 通用内容区域 ---------- */
+.about-section {
+    position: relative;
+    z-index: 1;
+    padding: 60px 20px;
+}
+
+.about-section.alt-bg {
+    background: rgba(255,255,255,0.02);
+}
+
+.section-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: clamp(22px, 3.5vw, 30px);
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.title-icon { font-size: 28px; }
+
+/* ---------- 活动背景故事卡片 ---------- */
+.story-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 35px 40px;
+    line-height: 2;
+    font-size: 15px;
+    color: #ccccdd;
+}
+
+.story-card p { margin-bottom: 16px; }
+.story-card p:last-child { margin-bottom: 0; }
+
+.story-highlight {
+    text-align: center;
+    font-size: 18px;
+    color: var(--pink) !important;
+    font-weight: 700;
+    margin-top: 20px !important;
+}
+
+/* ---------- 规则卡片 ---------- */
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.rule-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px;
+    transition: all 0.3s;
+}
+
+.rule-card:hover {
+    border-color: var(--pink);
+    transform: translateY(-4px);
+}
+
+.rule-number {
+    font-size: 36px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.rule-card h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.rule-card p {
+    font-size: 14px;
+    color: var(--text-gray);
+    line-height: 1.7;
+}
+
+/* ---------- 时间线 ---------- */
+.timeline {
+    position: relative;
+    padding-left: 40px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: rgba(255,255,255,0.1);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 35px;
+}
+
+.timeline-item:last-child { margin-bottom: 0; }
+
+.tl-dot {
+    position: absolute;
+    left: -33px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #333;
+    border: 3px solid #555;
+}
+
+.tl-dot.active {
+    background: var(--pink);
+    border-color: var(--pink);
+    box-shadow: 0 0 12px rgba(233,69,96,0.4);
+}
+
+.tl-content {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 22px 28px;
+}
+
+.tl-date {
+    font-size: 13px;
+    color: var(--pink);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.tl-content h3 { font-size: 17px; margin-bottom: 6px; }
+.tl-content p { font-size: 14px; color: var(--text-gray); }
+
+/* ---------- 分组概览 ---------- */
+.group-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.group-card {
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.3s;
+}
+
+.group-card:hover { transform: translateY(-4px); }
+
+.gc-anime  { background: linear-gradient(135deg, rgba(233,69,96,0.15), rgba(233,69,96,0.05)); }
+.gc-game   { background: linear-gradient(135deg, rgba(83,52,131,0.15), rgba(83,52,131,0.05)); }
+.gc-comic  { background: linear-gradient(135deg, rgba(15,52,96,0.2), rgba(15,52,96,0.05)); }
+.gc-vtuber { background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(255,215,0,0.03)); }
+
+.gc-icon { font-size: 40px; margin-bottom: 12px; }
+.group-card h3 { font-size: 17px; margin-bottom: 8px; }
+.group-card p { font-size: 13px; color: var(--text-gray); margin-bottom: 10px; }
+.gc-examples { font-size: 12px; color: #666; }
+
+/* ---------- 底部CTA ---------- */
+.about-cta-section {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(233,69,96,0.08), rgba(83,52,131,0.08));
+}
+
+.about-cta-section h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.about-cta-section p {
+    color: var(--text-gray);
+    margin-bottom: 25px;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* ============================================================
+   最终结果页
+   ============================================================ */
+
+/* 结果主视觉 */
+.final-hero {
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+    background: url('images/banner-bg.jpg.jpeg') center/cover no-repeat;
+}
+
+.final-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(10,10,30,0.88),
+        rgba(83,52,131,0.75),
+        rgba(233,69,96,0.3)
+    );
+    z-index: 1;
+}
+
+.final-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px 20px;
+}
+
+.crown-icon {
+    font-size: 64px;
+    margin-bottom: 15px;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+.final-hero-content h1 {
+    font-size: clamp(24px, 5vw, 42px);
+    margin-bottom: 10px;
+}
+
+.final-subtitle {
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 4px;
+}
+
+/* 总冠军卡片 */
+.champion-section {
+    position: relative;
+    z-index: 1;
+    padding: 50px 20px 30px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.champion-card {
+    background: linear-gradient(135deg, #1a1035, #241545);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255,215,0,0.15);
+}
+
+.champ-emoji { font-size: 80px; margin-bottom: 15px; }
+.champ-crown { font-size: 36px; margin-bottom: 5px; }
+.champ-name { font-size: 32px; color: var(--gold); margin-bottom: 5px; }
+.champ-anime { font-size: 16px; color: var(--text-gray); margin-bottom: 15px; }
+.champ-votes { font-size: 40px; font-weight: 900; color: var(--pink); }
+.champ-pct { font-size: 14px; color: var(--text-gray); margin-top: 5px; }
+
+/* 领奖台 */
+.podium-section {
+    position: relative;
+    z-index: 1;
+    padding: 30px 20px 50px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.podium {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.podium-item {
+    text-align: center;
+    flex: 1;
+    max-width: 220px;
+}
+
+.podium-char-emoji { font-size: 48px; margin-bottom: 8px; }
+.podium-char-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.podium-char-votes { font-size: 14px; color: var(--pink); margin-bottom: 10px; }
+
+.podium-block {
+    background: linear-gradient(180deg, var(--bg-card), rgba(255,255,255,0.05));
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.p1 .podium-block { border-color: var(--gold); background: linear-gradient(180deg, rgba(255,215,0,0.15), var(--bg-card)); }
+.p2 .podium-block { border-color: var(--silver); }
+.p3 .podium-block { border-color: var(--bronze); }
+
+.podium-label { font-size: 14px; font-weight: 700; }
+
+/* 各组冠军 */
+.group-champions-section {
+    position: relative;
+    z-index: 1;
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.group-champs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+}
+
+.gc-result-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.gc-result-card:hover { border-color: var(--pink); transform: translateY(-4px); }
+.gc-result-group { font-size: 13px; color: var(--pink); margin-bottom: 10px; }
+.gc-result-emoji { font-size: 44px; margin-bottom: 10px; }
+.gc-result-card h3 { font-size: 17px; margin-bottom: 4px; }
+.gc-result-card p { font-size: 13px; color: var(--text-gray); margin-bottom: 10px; }
+.gc-result-votes { font-size: 22px; font-weight: 800; color: var(--gold); }
+
+/* 数据总览 */
+.final-stats-section {
+    position: relative;
+    z-index: 1;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.final-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+}
+
+.fs-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 25px;
+    text-align: center;
+}
+
+.fs-num { font-size: 36px; font-weight: 900; color: var(--pink); }
+.fs-label { font-size: 13px; color: var(--text-gray); margin-top: 6px; }
+
+/* 最终图表区域 */
+.final-chart-section {
+    position: relative;
+    z-index: 1;
+    padding: 40px 20px;
+}
+
+/* ---------- 响应式补充 ---------- */
+@media (max-width: 768px) {
+    .about-date-box { flex-direction: column; gap: 10px; }
+    .date-divider { transform: rotate(90deg); }
+    .rules-grid { grid-template-columns: 1fr; }
+    .group-overview { grid-template-columns: 1fr 1fr; }
+    .podium-item { max-width: 140px; }
+    .podium-char-emoji { font-size: 32px; }
+    .champ-emoji { font-size: 56px; }
+    .champ-name { font-size: 24px; }
+    .champ-votes { font-size: 30px; }
+}
+
+@media (max-width: 480px) {
+    .group-overview { grid-template-columns: 1fr; }
+    .group-champs-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links a { padding: 6px 10px; font-size: 12px; }
+}
+/* ============================================================
+   ===== 四川大学萌战 - 专用新增样式 =====
+   ============================================================ */
+
+/* ---------- 最萌三原则 ---------- */
+.principles-box {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.principle-item {
+    background: linear-gradient(135deg, rgba(233,69,96,0.12), rgba(83,52,131,0.12));
+    border: 1px solid rgba(233,69,96,0.25);
+    border-radius: 16px;
+    padding: 28px 30px;
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+    max-width: 320px;
+    transition: all 0.3s;
+}
+
+.principle-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--pink);
+    box-shadow: 0 8px 30px rgba(233,69,96,0.15);
+}
+
+.principle-num {
+    font-size: 42px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--pink), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    font-family: "KaiTi", "STKaiti", serif;
+}
+
+.principle-item p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ddd;
+    font-weight: 500;
+}
+
+.principles-footer {
+    text-align: center;
+    color: var(--text-gray);
+    font-size: 14px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* ---------- 世界观故事 ---------- */
+.lore-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lore-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 30px 35px;
+    line-height: 2;
+    font-size: 15px;
+    color: #ccccdd;
+    position: relative;
+    overflow: hidden;
+}
+
+.lore-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--pink), var(--purple));
+    border-radius: 4px 0 0 4px;
+}
+
+.lore-card p { margin-bottom: 12px; }
+.lore-card p:last-child { margin-bottom: 0; }
+
+.lore-chapter {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--pink);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.highlight-moe {
+    color: var(--pink) !important;
+    font-size: 17px;
+    text-shadow: 0 0 12px rgba(233,69,96,0.4);
+}
+
+.lore-highlight-box {
+    background: linear-gradient(135deg, rgba(233,69,96,0.1), rgba(83,52,131,0.15));
+    border: 1px solid rgba(233,69,96,0.2);
+    border-radius: 16px;
+    padding: 35px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 2.2;
+    color: #ddd;
+}
+
+.lore-highlight-box p { margin-bottom: 4px; }
+
+.lore-quote {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gold);
+    margin: 18px 0;
+    text-shadow: 0 0 20px rgba(255,215,0,0.3);
+}
+
+.lore-call {
+    margin-top: 15px !important;
+    font-size: 15px;
+    color: var(--text-gray);
+}
+
+/* ---------- 赛事流程条 ---------- */
+.flow-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 30px 0;
+}
+
+.flow-step {
+    text-align: center;
+    padding: 20px 25px;
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    min-width: 120px;
+    transition: all 0.3s;
+}
+
+.flow-step:hover {
+    border-color: var(--pink);
+    transform: translateY(-4px);
+}
+
+.flow-icon { font-size: 36px; margin-bottom: 8px; }
+.flow-label { font-size: 17px; font-weight: 700; }
+.flow-sub { font-size: 12px; color: var(--text-gray); margin-top: 3px; }
+
+.flow-arrow {
+    font-size: 24px;
+    color: var(--pink);
+    padding: 0 12px;
+    font-weight: 700;
+}
+
+.flow-note {
+    text-align: center;
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+/* ---------- 阶段详细规则块 ---------- */
+.stage-block {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 18px;
+}
+
+.stage-block:last-child { margin-bottom: 0; }
+
+.stage-subtitle {
+    font-size: 17px;
+    margin-bottom: 16px;
+    color: var(--pink);
+}
+
+.stage-note {
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.9;
+}
+
+/* 规则列表 */
+.rule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.rule-dot {
+    width: 8px; height: 8px;
+    min-width: 8px;
+    background: var(--pink);
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.rule-text {
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.8;
+}
+
+.rule-text a.inline-link {
+    color: var(--pink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.rule-text a.inline-link:hover { color: #ff8a9e; }
+
+/* ---------- 每轮节奏时间线 ---------- */
+.round-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.round-day {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    border-left: 3px solid var(--pink);
+    transition: background 0.2s;
+}
+
+.round-day:hover { background: rgba(255,255,255,0.04); }
+
+.rd-badge {
+    background: var(--pink);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 12px;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+}
+
+.rd-badge.rd-gold {
+    background: linear-gradient(135deg, var(--gold), #f0c040);
+    color: #1a1a00;
+}
+
+.rd-content {
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.easter-egg {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--gold);
+    margin-left: 6px;
+}
+
+/* ---------- 核心理念卡片 ---------- */
+.philosophy-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    font-size: 16px;
+    color: #ccccdd;
+    line-height: 2.2;
+}
+
+.philosophy-card p { margin-bottom: 14px; }
+
+.philosophy-highlight {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--pink);
+    margin: 25px 0 20px;
+    text-shadow: 0 0 20px rgba(233,69,96,0.3);
+}
+
+.philosophy-sign {
+    font-size: 14px;
+    color: var(--text-gray);
+    margin-top: 25px;
+    line-height: 1.8;
+}
+
+/* ---------- 响应式补充 ---------- */
+@media (max-width: 768px) {
+    .principles-box { flex-direction: column; align-items: center; }
+    .principle-item { max-width: 100%; }
+    .flow-bar { flex-direction: column; gap: 10px; }
+    .flow-arrow { transform: rotate(90deg); padding: 5px 0; }
+    .lore-card { padding: 22px 20px; }
+    .lore-highlight-box { padding: 25px 18px; }
+    .stage-block { padding: 22px 20px; }
+    .round-day { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

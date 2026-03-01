@@ -5,22 +5,22 @@
 // 和 main.js 中一样的角色基础数据
 // （为了让 results.html 能独立运行，这里再写一份）
 var BASE_DATA = [
-    { id:1,  name:"初音未来",       anime:"VOCALOID",              group:"vtuber",  emoji:"🎤", votes:1283 },
-    { id:2,  name:"蕾姆",           anime:"Re:从零开始的异世界生活", group:"anime",   emoji:"💙", votes:1156 },
-    { id:3,  name:"灶门炭治郎",     anime:"鬼灭之刃",              group:"anime",   emoji:"🔥", votes:1089 },
-    { id:4,  name:"2B",             anime:"尼尔：机械纪元",         group:"game",    emoji:"⚔️", votes:987  },
-    { id:5,  name:"五条悟",         anime:"咒术回战",               group:"anime",   emoji:"👁️", votes:1342 },
-    { id:6,  name:"阿尼亚·福杰",   anime:"间谍过家家",             group:"anime",   emoji:"🥜", votes:1421 },
-    { id:7,  name:"雷电将军",       anime:"原神",                   group:"game",    emoji:"⚡", votes:1105 },
-    { id:8,  name:"路飞",           anime:"ONE PIECE 海贼王",       group:"comic",   emoji:"👒", votes:1267 },
-    { id:9,  name:"洛天依",         anime:"VOCALOID",              group:"vtuber",  emoji:"🎵", votes:834  },
-    { id:10, name:"漩涡鸣人",       anime:"火影忍者",               group:"comic",   emoji:"🍥", votes:1178 },
-    { id:11, name:"钟离",           anime:"原神",                   group:"game",    emoji:"🪨", votes:956  },
-    { id:12, name:"御坂美琴",       anime:"某科学的超电磁炮",       group:"anime",   emoji:"⚡", votes:892  },
-    { id:13, name:"坂田银时",       anime:"银魂",                   group:"anime",   emoji:"🍓", votes:1045 },
-    { id:14, name:"林克",           anime:"塞尔达传说",             group:"game",    emoji:"🗡️", votes:978  },
-    { id:15, name:"藤本千空",       anime:"Dr.STONE 石纪元",       group:"anime",   emoji:"🧪", votes:756  },
-    { id:16, name:"虎杖悠仁",       anime:"咒术回战",               group:"anime",   emoji:"👊", votes:823  }
+    { id:1,  name:"初音未来",       anime:"VOCALOID",              group:"vtuber",  emoji:"🎤", votes:0 },
+    { id:2,  name:"蕾姆",           anime:"Re:从零开始的异世界生活", group:"anime",   emoji:"💙", votes:0 },
+    { id:3,  name:"灶门炭治郎",     anime:"鬼灭之刃",              group:"anime",   emoji:"🔥", votes:0 },
+    { id:4,  name:"2B",             anime:"尼尔：机械纪元",         group:"game",    emoji:"⚔️", votes:0  },
+    { id:5,  name:"五条悟",         anime:"咒术回战",               group:"anime",   emoji:"👁️", votes:0 },
+    { id:6,  name:"阿尼亚·福杰",   anime:"间谍过家家",             group:"anime",   emoji:"🥜", votes:0 },
+    { id:7,  name:"雷电将军",       anime:"原神",                   group:"game",    emoji:"⚡", votes:0 },
+    { id:8,  name:"路飞",           anime:"ONE PIECE 海贼王",       group:"comic",   emoji:"👒", votes:0 },
+    { id:9,  name:"洛天依",         anime:"VOCALOID",              group:"vtuber",  emoji:"🎵", votes:0  },
+    { id:10, name:"漩涡鸣人",       anime:"火影忍者",               group:"comic",   emoji:"🍥", votes:0 },
+    { id:11, name:"钟离",           anime:"原神",                   group:"game",    emoji:"🪨", votes:0  },
+    { id:12, name:"御坂美琴",       anime:"某科学的超电磁炮",       group:"anime",   emoji:"⚡", votes:0  },
+    { id:13, name:"坂田银时",       anime:"银魂",                   group:"anime",   emoji:"🍓", votes:0 },
+    { id:14, name:"林克",           anime:"塞尔达传说",             group:"game",    emoji:"🗡️", votes:0  },
+    { id:15, name:"藤本千空",       anime:"Dr.STONE 石纪元",       group:"anime",   emoji:"🧪", votes:0  },
+    { id:16, name:"虎杖悠仁",       anime:"咒术回战",               group:"anime",   emoji:"👊", votes:0  }
 ];
 
 // 分组的中文名映射
