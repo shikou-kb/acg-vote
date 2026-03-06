@@ -1,5 +1,6 @@
 /* ============================================================
-   ACG角色人气投票 —— 最终结果页逻辑 (final.js)
+   四川大学萌战 —— 最终结果页 (final.js)
+   从 LeanCloud 数据库读取数据
    ============================================================ */
 
 var BASE_DATA = [
@@ -22,149 +23,82 @@ var BASE_DATA = [
 ];
 
 var GROUP_LABELS = { anime:"🎬 动画", game:"🎮 游戏", comic:"📚 漫画", vtuber:"🎤 虚拟歌手" };
+var COLORS = ["#e94560","#ff6b81","#533483","#7c5cbf","#0f3460","#1a5276","#ffd700","#f39c12","#2ecc71","#1abc9c","#e67e22","#e74c3c","#9b59b6","#3498db","#1dd1a1","#ff9ff3"];
 
-var COLORS = ["#e94560","#ff6b81","#533483","#7c5cbf","#0f3460","#1a5276",
-              "#ffd700","#f39c12","#2ecc71","#1abc9c","#e67e22","#e74c3c",
-              "#9b59b6","#3498db","#1dd1a1","#ff9ff3"];
-
-// 加载数据
-function loadData() {
-    var data = BASE_DATA.map(function(c){ return {id:c.id,name:c.name,anime:c.anime,group:c.group,emoji:c.emoji,votes:c.votes}; });
-    var saved = localStorage.getItem("acgVoteData");
-    if(saved){
-        var map = JSON.parse(saved);
-        data.forEach(function(c){ if(map[c.id]!==undefined) c.votes=map[c.id]; });
+document.addEventListener("DOMContentLoaded", async function(){
+    try {
+        var chars = await loadFromDB();
+        var total = 0;
+        chars.forEach(function(c){ total+=c.votes; });
+        renderChampion(chars[0], total);
+        renderPodium(chars.slice(0,3), total);
+        renderGroupChamps(chars);
+        renderFinalStats(chars, total);
+        renderFinalChart(chars);
+        renderFinalTable(chars, total);
+    } catch(err) {
+        console.error('加载最终结果失败:', err);
     }
+});
+
+async function loadFromDB() {
+    var data = BASE_DATA.map(function(c){
+        return {id:c.id,name:c.name,anime:c.anime,group:c.group,emoji:c.emoji,votes:c.votes};
+    });
+    var votesMap = await dbFetchVotes();
+    data.forEach(function(c){ if(votesMap[c.id]!==undefined) c.votes=votesMap[c.id]; });
     data.sort(function(a,b){ return b.votes-a.votes; });
     return data;
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-    var chars = loadData();
-    var total = 0;
-    chars.forEach(function(c){ total+=c.votes; });
-
-    renderChampion(chars[0], total);
-    renderPodium(chars.slice(0,3), total);
-    renderGroupChamps(chars);
-    renderFinalStats(chars, total);
-    renderFinalChart(chars);
-    renderFinalTable(chars, total);
-});
-
-// 总冠军
 function renderChampion(champ, total){
     if(!champ) return;
-    var pct = total>0 ? ((champ.votes/total)*100).toFixed(1) : "0.0";
+    var pct = total>0?((champ.votes/total)*100).toFixed(1):"0.0";
     document.getElementById("champion-card").innerHTML =
-        '<div class="champ-emoji">'+champ.emoji+'</div>'+
-        '<div class="champ-info">'+
-            '<div class="champ-crown">👑</div>'+
-            '<h2 class="champ-name">'+champ.name+'</h2>'+
-            '<p class="champ-anime">《'+champ.anime+'》</p>'+
-            '<div class="champ-votes">'+champ.votes.toLocaleString()+' 票</div>'+
-            '<div class="champ-pct">占总票数 '+pct+'%</div>'+
-        '</div>';
+        '<div class="champ-emoji">'+champ.emoji+'</div><div class="champ-info"><div class="champ-crown">👑</div><h2 class="champ-name">'+champ.name+'</h2><p class="champ-anime">《'+champ.anime+'》</p><div class="champ-votes">'+champ.votes.toLocaleString()+' 票</div><div class="champ-pct">占总票数 '+pct+'%</div></div>';
 }
 
-// 领奖台
-function renderPodium(top3, total){
+function renderPodium(top3){
     if(top3.length<3) return;
-    // 显示顺序: 第2名 | 第1名 | 第3名
-    var order = [top3[1], top3[0], top3[2]];
-    var labels = ["🥈 第二名","🥇 第一名","🥉 第三名"];
-    var heights = ["180px","240px","140px"];
-    var html = "";
+    var order=[top3[1],top3[0],top3[2]]; var labels=["🥈 第二名","🥇 第一名","🥉 第三名"]; var heights=["180px","240px","140px"];
+    var html="";
     order.forEach(function(c,i){
-        html +=
-            '<div class="podium-item p'+(i===1?'1':i===0?'2':'3')+'">'+
-                '<div class="podium-char-emoji">'+c.emoji+'</div>'+
-                '<div class="podium-char-name">'+c.name+'</div>'+
-                '<div class="podium-char-votes">'+c.votes.toLocaleString()+' 票</div>'+
-                '<div class="podium-block" style="height:'+heights[i]+'">'+
-                    '<div class="podium-label">'+labels[i]+'</div>'+
-                '</div>'+
-            '</div>';
+        html+='<div class="podium-item p'+(i===1?'1':i===0?'2':'3')+'"><div class="podium-char-emoji">'+c.emoji+'</div><div class="podium-char-name">'+c.name+'</div><div class="podium-char-votes">'+c.votes.toLocaleString()+' 票</div><div class="podium-block" style="height:'+heights[i]+'"><div class="podium-label">'+labels[i]+'</div></div></div>';
     });
-    document.getElementById("podium").innerHTML = html;
+    document.getElementById("podium").innerHTML=html;
 }
 
-// 各组冠军
 function renderGroupChamps(chars){
-    var groups = {};
-    chars.forEach(function(c){
-        if(!groups[c.group]) groups[c.group]=c;
-    });
-    var html = "";
+    var groups={};
+    chars.forEach(function(c){ if(!groups[c.group]) groups[c.group]=c; });
+    var html="";
     Object.keys(groups).forEach(function(g){
-        var c = groups[g];
-        html +=
-            '<div class="gc-result-card">'+
-                '<div class="gc-result-group">'+(GROUP_LABELS[g]||g)+'</div>'+
-                '<div class="gc-result-emoji">'+c.emoji+'</div>'+
-                '<h3>'+c.name+'</h3>'+
-                '<p>《'+c.anime+'》</p>'+
-                '<div class="gc-result-votes">'+c.votes.toLocaleString()+' 票</div>'+
-            '</div>';
+        var c=groups[g];
+        html+='<div class="gc-result-card"><div class="gc-result-group">'+(GROUP_LABELS[g]||g)+'</div><div class="gc-result-emoji">'+c.emoji+'</div><h3>'+c.name+'</h3><p>《'+c.anime+'》</p><div class="gc-result-votes">'+c.votes.toLocaleString()+' 票</div></div>';
     });
-    document.getElementById("group-champs").innerHTML = html;
+    document.getElementById("group-champs").innerHTML=html;
 }
 
-// 数据总览
-function renderFinalStats(chars, total){
-    var groups = {};
-    chars.forEach(function(c){ groups[c.group]=(groups[c.group]||0)+1; });
+function renderFinalStats(chars,total){
     document.getElementById("final-stats").innerHTML =
         '<div class="fs-card"><div class="fs-num">'+total.toLocaleString()+'</div><div class="fs-label">总投票数</div></div>'+
         '<div class="fs-card"><div class="fs-num">'+chars.length+'</div><div class="fs-label">参选角色</div></div>'+
-        '<div class="fs-card"><div class="fs-num">'+Object.keys(groups).length+'</div><div class="fs-label">参赛组别</div></div>'+
-        '<div class="fs-card"><div class="fs-num">'+(total>0?Math.round(total/chars.length):0)+'</div><div class="fs-label">平均每角色得票</div></div>';
+        '<div class="fs-card"><div class="fs-num">'+Object.keys(GROUP_LABELS).length+'</div><div class="fs-label">参赛组别</div></div>'+
+        '<div class="fs-card"><div class="fs-num">'+(total>0?Math.round(total/chars.length):0)+'</div><div class="fs-label">平均得票</div></div>';
 }
 
-// 柱状图
 function renderFinalChart(chars){
-    var ctx = document.getElementById("finalBarChart").getContext("2d");
-    new Chart(ctx,{
-        type:"bar",
-        data:{
-            labels: chars.map(function(c){return c.emoji+" "+c.name;}),
-            datasets:[{
-                label:"票数",
-                data: chars.map(function(c){return c.votes;}),
-                backgroundColor: chars.map(function(_,i){return COLORS[i%COLORS.length];}),
-                borderRadius:6, borderSkipped:false
-            }]
-        },
-        options:{
-            indexAxis:"y", responsive:true,
-            plugins:{ legend:{display:false} },
-            scales:{
-                x:{ ticks:{color:"#8888aa"}, grid:{color:"rgba(255,255,255,0.04)"} },
-                y:{ ticks:{color:"#f0f0f0",font:{size:13}}, grid:{display:false} }
-            }
-        }
-    });
+    var ctx=document.getElementById("finalBarChart").getContext("2d");
+    new Chart(ctx,{type:"bar",data:{labels:chars.map(function(c){return c.emoji+" "+c.name;}),datasets:[{label:"票数",data:chars.map(function(c){return c.votes;}),backgroundColor:chars.map(function(_,i){return COLORS[i%COLORS.length];}),borderRadius:6,borderSkipped:false}]},options:{indexAxis:"y",responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{color:"#8888aa"},grid:{color:"rgba(255,255,255,0.04)"}},y:{ticks:{color:"#f0f0f0",font:{size:13}},grid:{display:false}}}}});
 }
 
-// 排名表格
-function renderFinalTable(chars, total){
-    var tbody = document.getElementById("final-rank-tbody");
-    var html = "";
+function renderFinalTable(chars,total){
+    var tbody=document.getElementById("final-rank-tbody"); var html="";
     chars.forEach(function(c,idx){
-        var rank = idx+1;
-        var pct = total>0?((c.votes/total)*100).toFixed(1):"0.0";
-        var rd, rc;
-        if(rank===1){rd="🥇";rc="gold";}
-        else if(rank===2){rd="🥈";rc="silver";}
-        else if(rank===3){rd="🥉";rc="bronz";}
-        else{rd="#"+rank;rc="";}
-        html +=
-            '<tr><td class="col-rank '+rc+'">'+rd+'</td>'+
-            '<td>'+c.emoji+' <strong>'+c.name+'</strong></td>'+
-            '<td>《'+c.anime+'》</td>'+
-            '<td>'+(GROUP_LABELS[c.group]||c.group)+'</td>'+
-            '<td><strong>'+c.votes.toLocaleString()+'</strong></td>'+
-            '<td class="col-bar">'+pct+'%<div class="mini-bar"><div class="mini-bar-fill" style="width:'+pct+'%"></div></div></td></tr>';
+        var rank=idx+1; var pct=total>0?((c.votes/total)*100).toFixed(1):"0.0";
+        var rd,rc;
+        if(rank===1){rd="🥇";rc="gold";}else if(rank===2){rd="🥈";rc="silver";}else if(rank===3){rd="🥉";rc="bronz";}else{rd="#"+rank;rc="";}
+        html+='<tr><td class="col-rank '+rc+'">'+rd+'</td><td>'+c.emoji+' <strong>'+c.name+'</strong></td><td>《'+c.anime+'》</td><td>'+(GROUP_LABELS[c.group]||c.group)+'</td><td><strong>'+c.votes.toLocaleString()+'</strong></td><td class="col-bar">'+pct+'%<div class="mini-bar"><div class="mini-bar-fill" style="width:'+pct+'%"></div></div></td></tr>';
     });
-    tbody.innerHTML = html;
+    tbody.innerHTML=html;
 }
