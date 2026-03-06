@@ -637,7 +637,7 @@ body::before {
     overflow: hidden;
     z-index: 1;
     /* 👇 这里引用你的背景图片 */
-    background: url('images/about-bg.jpg.jpeg') center/cover no-repeat;
+    background: url('images/about-bg.jpg.jpg') center/cover no-repeat;
 }
 
 /* 背景图上面盖一层半透明渐变色（让文字看得清） */
@@ -952,7 +952,7 @@ body::before {
     text-align: center;
     overflow: hidden;
     z-index: 1;
-    background: url('images/banner-bg.jpg.jpeg') center/cover no-repeat;
+    background: url('images/banner-bg.jpg.jpg') center/cover no-repeat;
 }
 
 .final-hero-overlay {
